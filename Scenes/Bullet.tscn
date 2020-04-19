@@ -65,11 +65,23 @@ tracks/1/keys = {
 "update": 1,
 "values": [ true, false ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Explode:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.5, 0.5 ) ]
+}
 
 [node name="Bullet" type="Area2D" groups=[
 "cannon_bullets",
 ]]
-collision_layer = 8
+collision_layer = 0
 collision_mask = 38
 script = ExtResource( 2 )
 
@@ -87,6 +99,7 @@ scale = Vector2( 0.457044, 0.304478 )
 
 [node name="Smoke" type="Particles2D" parent="."]
 position = Vector2( -12.2406, 0.0347395 )
+emitting = false
 amount = 22
 lifetime = 2.0
 speed_scale = 5.0
@@ -97,6 +110,7 @@ texture = ExtResource( 3 )
 
 [node name="Explode" type="Sprite" parent="."]
 visible = false
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 6 )
 
 [node name="Anime" type="AnimationPlayer" parent="."]

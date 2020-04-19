@@ -1,0 +1,51 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://original/sprites/explosion4.png" type="Texture" id=1]
+[ext_resource path="res://original/sprites/explosion3.png" type="Texture" id=2]
+[ext_resource path="res://original/sprites/explosion5.png" type="Texture" id=3]
+[ext_resource path="res://original/sprites/explosion2.png" type="Texture" id=4]
+[ext_resource path="res://original/sprites/explosion1.png" type="Texture" id=5]
+[ext_resource path="res://Scripts/General_Explosion.gd" type="Script" id=6]
+[ext_resource path="res://original/samples/barrel_explosion.wav" type="AudioStream" id=7]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Explosion"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 5 ), ExtResource( 4 ), ExtResource( 2 ), ExtResource( 1 ), ExtResource( 3 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[node name="Explosion" type="Node2D"]
+script = ExtResource( 6 )
+
+[node name="Sprite" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 5 )
+
+[node name="Anime" type="AnimationPlayer" parent="."]
+anims/Explosion = SubResource( 1 )
+
+[node name="Audio_explosion" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = 5.0

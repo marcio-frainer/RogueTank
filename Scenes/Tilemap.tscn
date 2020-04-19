@@ -387,6 +387,15 @@ centered = false
 region_enabled = true
 region_rect = Rect2( 1152, 0, 128, 128 )
 
+[node name="Body" type="StaticBody2D" parent="original40"]
+
+[node name="Poly" type="CollisionPolygon2D" parent="original40/Body"]
+polygon = PoolVector2Array( 0.0914307, 30.7928, 127.916, 31.5542, 127.916, 23.457, 0.0914307, 22.6393 )
+
+[node name="Poly2" type="CollisionPolygon2D" parent="original40/Body"]
+position = Vector2( 0, 75.1601 )
+polygon = PoolVector2Array( 0.0914307, 30.7928, 127.916, 31.5542, 127.916, 23.457, 0.0914307, 22.6393 )
+
 [node name="original39" type="Sprite" parent="."]
 position = Vector2( 1152, 128 )
 texture = ExtResource( 1 )

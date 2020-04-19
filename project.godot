@@ -19,6 +19,10 @@ config/name="RogueTank"
 run/main_scene="res://Scenes/Main.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+GAME="*res://Scripts/Game.gd"
+
 [display]
 
 window/handheld/orientation="sensor_landscape"

@@ -130,7 +130,7 @@ func executeBullet():
 	bullet.add_to_group(tank_bullet_obj)
 	bullet.global_position = $Barrel/Pos_Bullet.global_position
 	bullet.dir = Vector2( cos($Barrel.global_rotation), sin($Barrel.global_rotation) ).normalized()
-	bullet.distance_explode = $Barrel/Sight.position.x - $Barrel/Pos_Bullet.position.x
+	bullet.max_distance = $Barrel/Sight.position.x - $Barrel/Pos_Bullet.position.x
 	bullet_loaded = false
 	$Barrel/Sight.update()
 	$bullet_reload.start()

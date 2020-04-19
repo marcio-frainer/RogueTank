@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/area_destructable.gd" type="Script" id=1]
 [ext_resource path="res://original/sprites/barrelBlack_top.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://original/sprites/explosion1.png" type="Texture" id=6]
 [ext_resource path="res://original/sprites/explosion4.png" type="Texture" id=7]
 [ext_resource path="res://original/sprites/explosion3.png" type="Texture" id=8]
+[ext_resource path="res://original/samples/barrel_explosion.wav" type="AudioStream" id=9]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 12.8784
@@ -45,7 +46,7 @@ tracks/1/keys = {
 
 [node name="OilBarrel" type="StaticBody2D"]
 z_index = 10
-collision_layer = 4
+collision_layer = 32
 collision_mask = 0
 script = ExtResource( 3 )
 
@@ -65,3 +66,8 @@ anims/Destroy = SubResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
+
+[node name="Audio_explode" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = 5.0
+bus = "Fx"
