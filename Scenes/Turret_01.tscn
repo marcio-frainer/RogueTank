@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://Scripts/Turret_01.gd" type="Script" id=1]
 [ext_resource path="res://original/Enemies/towerDefense_tile228.png" type="Texture" id=2]
@@ -8,9 +8,13 @@
 [ext_resource path="res://Scripts/Weak_spot.gd" type="Script" id=6]
 [ext_resource path="res://Scenes/Explosion.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/HealthSprite.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scripts/Cannon.gd" type="Script" id=9]
+[ext_resource path="res://original/Enemies/towerDefense_tile249.png" type="Texture" id=10]
 [ext_resource path="res://original/Enemies/towerDefense_tile019.png" type="Texture" id=11]
 [ext_resource path="res://original/Enemies/towerDefense_tile020.png" type="Texture" id=12]
 [ext_resource path="res://original/Enemies/towerDefense_tile021.png" type="Texture" id=13]
+[ext_resource path="res://Scripts/Home_cannon.gd" type="Script" id=14]
+[ext_resource path="res://original/samples/barrel_explosion.wav" type="AudioStream" id=15]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 24.4863
@@ -39,10 +43,7 @@ scale = 0.5
 scale_curve = SubResource( 5 )
 color_ramp = SubResource( 3 )
 
-[sub_resource type="CircleShape2D" id=7]
-radius = 100.0
-
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=7]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Cannon/Sprite2:position")
@@ -57,8 +58,61 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( -20, 0 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="CircleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 19.4447, 25.4332 )
+
+[sub_resource type="Animation" id=9]
+resource_name = "Move"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 15, 0 ) ]
+}
+
+[sub_resource type="Gradient" id=13]
+offsets = PoolRealArray( 0.315508, 1 )
+colors = PoolColorArray( 0.932129, 0.932129, 0.932129, 1, 1, 1, 1, 0.6 )
+
+[sub_resource type="GradientTexture" id=14]
+gradient = SubResource( 13 )
+
+[sub_resource type="Curve" id=15]
+_data = [ Vector2( 0, 0.501136 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.994318 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=16]
+curve = SubResource( 15 )
+
+[sub_resource type="Curve" id=17]
+_data = [ Vector2( 0.0190476, 0.527273 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=18]
+curve = SubResource( 17 )
+
+[sub_resource type="ParticlesMaterial" id=12]
+trail_size_modifier = SubResource( 18 )
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 75.0
+angular_velocity = 90.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 16 )
+color_ramp = SubResource( 14 )
+
+[sub_resource type="CircleShape2D" id=10]
 radius = 29.8573
+
+[sub_resource type="CircleShape2D" id=19]
+radius = 100.0
 
 [node name="Turret_01" type="StaticBody2D" groups=[
 "radar_entity",
@@ -72,30 +126,28 @@ script = ExtResource( 1 )
 rotation = -1.5708
 polygon = PoolVector2Array( -21.5393, -17.4208, 21.6525, -17.2004, 21.6525, 7.81118, 13.0582, 17.7277, -14.0469, 17.1768, -22.0902, 8.3621 )
 
-[node name="Shoot" type="Timer" parent="."]
-wait_time = 0.4
-
 [node name="Sprite" type="Sprite" parent="."]
 rotation = -1.5708
 texture = ExtResource( 2 )
 
-[node name="Cannon" type="Area2D" parent="."]
+[node name="Heavy_cannon" type="Area2D" parent="."]
 gravity = 0.0
 collision_layer = 0
 collision_mask = 8
+script = ExtResource( 9 )
 
-[node name="Shape" type="CollisionShape2D" parent="Cannon"]
+[node name="Shape" type="CollisionShape2D" parent="Heavy_cannon"]
 shape = SubResource( 1 )
 
-[node name="Sight" type="RayCast2D" parent="Cannon"]
+[node name="Sight" type="RayCast2D" parent="Heavy_cannon"]
 cast_to = Vector2( 100, 0 )
 
-[node name="Sprite2" type="Sprite" parent="Cannon"]
+[node name="Sprite2" type="Sprite" parent="Heavy_cannon"]
 rotation = 1.5708
 texture = ExtResource( 3 )
 offset = Vector2( 0.196938, -13.7901 )
 
-[node name="Smoke" type="Particles2D" parent="Cannon"]
+[node name="Smoke" type="Particles2D" parent="Heavy_cannon"]
 position = Vector2( 65.8611, -1.19746 )
 emitting = false
 amount = 3
@@ -103,32 +155,63 @@ local_coords = false
 process_material = SubResource( 6 )
 texture = ExtResource( 5 )
 
-[node name="Sensor" type="Area2D" parent="Cannon"]
-gravity = 0.0
-collision_layer = 0
-
-[node name="Shape" type="CollisionShape2D" parent="Cannon/Sensor"]
-shape = SubResource( 7 )
-
-[node name="Anime" type="AnimationPlayer" parent="."]
+[node name="Anime" type="AnimationPlayer" parent="Heavy_cannon"]
 playback_speed = 2.0
-anims/Move = SubResource( 8 )
+anims/Move = SubResource( 7 )
 
-[node name="Audio_shoot" type="AudioStreamPlayer" parent="."]
+[node name="Audio_shoot" type="AudioStreamPlayer" parent="Heavy_cannon"]
 stream = ExtResource( 4 )
 
+[node name="Timer" type="Timer" parent="Heavy_cannon"]
+wait_time = 0.4
+
+[node name="Home_cannon" type="Area2D" parent="."]
+visible = false
+script = ExtResource( 14 )
+
+[node name="Shape" type="CollisionShape2D" parent="Home_cannon"]
+shape = SubResource( 8 )
+
+[node name="Sprite" type="Sprite" parent="Home_cannon"]
+position = Vector2( 15, 0 )
+rotation = 1.5708
+scale = Vector2( 1.2, 1.2 )
+texture = ExtResource( 10 )
+
+[node name="Fire_timer" type="Timer" parent="Home_cannon"]
+wait_time = 2.0
+
+[node name="Initial_fire" type="Position2D" parent="Home_cannon"]
+position = Vector2( 61.9993, 0.568787 )
+
+[node name="Audio" type="AudioStreamPlayer2D" parent="Home_cannon"]
+stream = ExtResource( 15 )
+
+[node name="Anime" type="AnimationPlayer" parent="Home_cannon"]
+anims/Move = SubResource( 9 )
+
+[node name="Smoke" type="Particles2D" parent="Home_cannon"]
+position = Vector2( 61.0841, 7.62939e-06 )
+scale = Vector2( 0.5, 0.5 )
+emitting = false
+amount = 7
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.8
+process_material = SubResource( 12 )
+texture = ExtResource( 5 )
+
 [node name="Weak_spot" type="Area2D" parent="."]
+visible = false
 collision_layer = 2
 collision_mask = 0
 script = ExtResource( 6 )
 
 [node name="Shape" type="CollisionShape2D" parent="Weak_spot"]
-shape = SubResource( 9 )
-
-[node name="Audio_hit" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 4 )
+shape = SubResource( 10 )
 
 [node name="Explode" parent="." instance=ExtResource( 7 )]
+visible = false
 
 [node name="Sprites_explosion" type="Sprite" parent="."]
 visible = false
@@ -144,6 +227,7 @@ position = Vector2( 0.359161, -0.656349 )
 texture = ExtResource( 13 )
 
 [node name="HealthIndicator" type="Node2D" parent="."]
+visible = false
 z_index = 100
 
 [node name="HealthSprite" parent="HealthIndicator" instance=ExtResource( 8 )]
@@ -151,7 +235,17 @@ margin_left = -27.46
 margin_top = -51.584
 margin_right = 31.54
 margin_bottom = -46.584
-[connection signal="timeout" from="Shoot" to="." method="_on_Timer_timeout"]
-[connection signal="body_entered" from="Cannon/Sensor" to="." method="_on_Sensor_body_entered"]
-[connection signal="body_exited" from="Cannon/Sensor" to="." method="_on_Sensor_body_exited"]
+
+[node name="Sensor" type="Area2D" parent="."]
+visible = false
+gravity = 0.0
+collision_layer = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Sensor"]
+visible = false
+shape = SubResource( 19 )
+[connection signal="timeout" from="Heavy_cannon/Timer" to="Heavy_cannon" method="_on_Timer_timeout"]
+[connection signal="timeout" from="Home_cannon/Fire_timer" to="Home_cannon" method="_on_Fire_timer_timeout"]
 [connection signal="damage" from="Weak_spot" to="." method="_on_Weak_spot_damage"]
+[connection signal="body_entered" from="Sensor" to="." method="_on_Sensor_body_entered"]
+[connection signal="body_exited" from="Sensor" to="." method="_on_Sensor_body_exited"]

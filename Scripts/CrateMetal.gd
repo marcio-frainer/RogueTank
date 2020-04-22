@@ -2,7 +2,6 @@ extends StaticBody2D
 
 const POINTS = 125
 var initial_health = 50
-var health = initial_health
 
 var textures = [
 	"res://original/sprites/crateMetal.png",
@@ -10,25 +9,6 @@ var textures = [
 	"res://original/sprites/crateMetal_damage_2.png",
 	"res://original/sprites/crateMetal_damage_3.png"	
 	]
-
-func _ready():
-	$Area_destructable.connect("hitted", self, "on_area_hitted")
-	
-func on_area_hitted(damage, node):
-	health -= damage
-	if health <= 0:
-		queue_free()
-		
-	var perc = health * 100 / initial_health
-	
-	if perc > 80:
-		$Sprite.texture = load(textures[0])
-	elif perc > 60 && perc < 80:
-		$Sprite.texture = load(textures[1])
-	elif perc > 30 && perc < 60:	
-		$Sprite.texture = load(textures[2])
-	elif perc < 30:
-		$Sprite.texture = load(textures[3])	
 
 func queue_free():
 	$Area_destructable.queue_free()
@@ -39,5 +19,17 @@ func queue_free():
 	$Explosion.queue_free()
 	GAME.add_score(POINTS)
 	.queue_free()
-	
 
+func _on_Area_destructable_destroid():
+	queue_free()
+
+func _on_Area_destructable_hitted(damage, health, node):
+	var perc = health * 100 / initial_health
+	if perc > 80:
+		$Sprite.texture = load(textures[0])
+	elif perc > 60 && perc < 80:
+		$Sprite.texture = load(textures[1])
+	elif perc > 30 && perc < 60:	
+		$Sprite.texture = load(textures[2])
+	elif perc < 30:
+		$Sprite.texture = load(textures[3])	

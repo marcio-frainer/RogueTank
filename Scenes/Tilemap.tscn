@@ -39,6 +39,8 @@ region_enabled = true
 region_rect = Rect2( 128, 0, 128, 128 )
 
 [node name="body" type="StaticBody2D" parent="original8"]
+collision_layer = 0
+collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="original8/body"]
 polygon = PoolVector2Array( 32, 0, 32, 128, 24, 128, 24, 0 )
@@ -76,6 +78,8 @@ region_enabled = true
 region_rect = Rect2( 256, 0, 128, 128 )
 
 [node name="Body" type="StaticBody2D" parent="original12"]
+collision_layer = 0
+collision_mask = 0
 
 [node name="Poly" type="CollisionPolygon2D" parent="original12/Body"]
 polygon = PoolVector2Array( 0, 23, 128, 23, 128, 31, 0, 32 )
@@ -92,6 +96,8 @@ region_enabled = true
 region_rect = Rect2( 256, 128, 128, 128 )
 
 [node name="Body" type="StaticBody2D" parent="original11"]
+collision_layer = 0
+collision_mask = 0
 
 [node name="Poly" type="CollisionPolygon2D" parent="original11/Body"]
 polygon = PoolVector2Array( 0, 24, 23, 24, 23, 0, 32, 0, 32, 28, 27, 32, 0, 32 )
@@ -133,6 +139,8 @@ region_enabled = true
 region_rect = Rect2( 384, 0, 128, 128 )
 
 [node name="Body" type="StaticBody2D" parent="original16"]
+collision_layer = 0
+collision_mask = 0
 
 [node name="Poly" type="CollisionPolygon2D" parent="original16/Body"]
 polygon = PoolVector2Array( 24, 0, 24, 127, 32, 127, 32, 0 )
@@ -153,6 +161,8 @@ region_enabled = true
 region_rect = Rect2( 384, 128, 128, 128 )
 
 [node name="Body" type="StaticBody2D" parent="original15"]
+collision_layer = 0
+collision_mask = 0
 
 [node name="Poly" type="CollisionPolygon2D" parent="original15/Body"]
 polygon = PoolVector2Array( 24, 128, 26, 102, 34, 75, 57, 43, 84, 31, 128, 24, 128, 33, 89, 39, 65, 50, 42, 80, 33, 104, 32, 128 )
@@ -182,6 +192,8 @@ region_enabled = true
 region_rect = Rect2( 512, 0, 128, 128 )
 
 [node name="Body" type="StaticBody2D" parent="original20"]
+collision_layer = 0
+collision_mask = 0
 
 [node name="Poly" type="CollisionPolygon2D" parent="original20/Body"]
 polygon = PoolVector2Array( 0, 24, 24, 24, 24, 0, 32, 0, 32, 27, 27, 32, 0, 32 )
@@ -203,6 +215,8 @@ region_rect = Rect2( 512, 128, 128, 128 )
 
 [node name="Body2" type="StaticBody2D" parent="original19"]
 position = Vector2( -128, 0 )
+collision_layer = 0
+collision_mask = 0
 
 [node name="Poly" type="CollisionPolygon2D" parent="original19/Body2"]
 position = Vector2( 256, 0 )
@@ -234,6 +248,8 @@ region_enabled = true
 region_rect = Rect2( 640, 0, 128, 128 )
 
 [node name="Body" type="StaticBody2D" parent="original24"]
+collision_layer = 0
+collision_mask = 0
 
 [node name="Poly" type="CollisionPolygon2D" parent="original24/Body"]
 polygon = PoolVector2Array( 24, 0, 24, 24, 0, 24, 0, 32, 27, 32, 32, 27, 32, 0 )
@@ -254,6 +270,8 @@ region_enabled = true
 region_rect = Rect2( 640, 128, 128, 128 )
 
 [node name="Body" type="StaticBody2D" parent="original23"]
+collision_layer = 0
+collision_mask = 0
 
 [node name="Poly" type="CollisionPolygon2D" parent="original23/Body"]
 polygon = PoolVector2Array( 105, 0, 105, 9, 110, 19, 117, 24, 128, 24, 128, 32, 117, 32, 104, 25, 97, 14, 96, 0 )
@@ -283,6 +301,8 @@ region_enabled = true
 region_rect = Rect2( 768, 0, 128, 128 )
 
 [node name="Body" type="StaticBody2D" parent="original28"]
+collision_layer = 0
+collision_mask = 0
 
 [node name="Poly" type="CollisionPolygon2D" parent="original28/Body"]
 polygon = PoolVector2Array( 0, 24, 128, 24, 128, 32, 0, 32 )
@@ -303,6 +323,8 @@ region_enabled = true
 region_rect = Rect2( 768, 128, 128, 128 )
 
 [node name="Body" type="StaticBody2D" parent="original27"]
+collision_layer = 0
+collision_mask = 0
 
 [node name="Poly" type="CollisionPolygon2D" parent="original27/Body"]
 polygon = PoolVector2Array( 0, 24, 11, 24, 18, 19, 24, 10, 24, 0, 31, 0, 31, 10, 26, 23, 12, 31, 0, 32 )
@@ -388,6 +410,8 @@ region_enabled = true
 region_rect = Rect2( 1152, 0, 128, 128 )
 
 [node name="Body" type="StaticBody2D" parent="original40"]
+collision_layer = 0
+collision_mask = 0
 
 [node name="Poly" type="CollisionPolygon2D" parent="original40/Body"]
 polygon = PoolVector2Array( 0.0914307, 30.7928, 127.916, 31.5542, 127.916, 23.457, 0.0914307, 22.6393 )

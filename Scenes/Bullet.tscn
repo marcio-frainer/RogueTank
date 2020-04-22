@@ -1,8 +1,8 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://original/sprites/bulletRed1_outline.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Bullet.gd" type="Script" id=2]
-[ext_resource path="res://original/sprites/smokeWhite1.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/Smoke.tscn" type="PackedScene" id=3]
 [ext_resource path="res://original/sprites/explosion1.png" type="Texture" id=4]
 [ext_resource path="res://original/sprites/explosion2.png" type="Texture" id=5]
 [ext_resource path="res://original/sprites/explosion5.png" type="Texture" id=6]
@@ -13,31 +13,7 @@
 radius = 4.35363
 height = 6.93867
 
-[sub_resource type="Gradient" id=2]
-offsets = PoolRealArray( 0, 0.385185, 0.525926 )
-colors = PoolColorArray( 0.772549, 0.772549, 0.772549, 1, 1, 1, 1, 0, 0.969382, 0.969382, 0.969382, 0.134615 )
-
-[sub_resource type="GradientTexture" id=3]
-gradient = SubResource( 2 )
-
-[sub_resource type="Curve" id=4]
-_data = [ Vector2( 0.0506329, 0.277273 ), 0.0, 0.201091, 0, 0, Vector2( 1, 1 ), 0.0350332, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=5]
-curve = SubResource( 4 )
-
-[sub_resource type="ParticlesMaterial" id=6]
-lifetime_randomness = 1.0
-flag_disable_z = true
-gravity = Vector3( 0, 0, 0 )
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-scale = 0.2
-scale_random = 0.15
-scale_curve = SubResource( 5 )
-color_ramp = SubResource( 3 )
-
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=2]
 resource_name = "Explosion"
 length = 0.4
 step = 0.7
@@ -97,16 +73,7 @@ shape = SubResource( 1 )
 position = Vector2( 0.044872, -0.493597 )
 scale = Vector2( 0.457044, 0.304478 )
 
-[node name="Smoke" type="Particles2D" parent="."]
-position = Vector2( -12.2406, 0.0347395 )
-emitting = false
-amount = 22
-lifetime = 2.0
-speed_scale = 5.0
-randomness = 1.0
-local_coords = false
-process_material = SubResource( 6 )
-texture = ExtResource( 3 )
+[node name="Smoke" parent="." instance=ExtResource( 3 )]
 
 [node name="Explode" type="Sprite" parent="."]
 visible = false
@@ -114,7 +81,7 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 6 )
 
 [node name="Anime" type="AnimationPlayer" parent="."]
-anims/Explosion = SubResource( 7 )
+anims/Explosion = SubResource( 2 )
 [connection signal="area_entered" from="." to="." method="_on_Bullet_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_Bullet_area_exited"]
 [connection signal="body_entered" from="." to="." method="_on_Bullet_body_entered"]

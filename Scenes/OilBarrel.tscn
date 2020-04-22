@@ -71,3 +71,4 @@ texture = ExtResource( 2 )
 stream = ExtResource( 9 )
 volume_db = 5.0
 bus = "Fx"
+[connection signal="destroid" from="Area_hit" to="." method="_on_Area_hit_destroid"]
